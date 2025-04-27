@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Qasim Transport and Hotels - Makkah & Madinah Accommodations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --accent-color: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 10px auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518632617565-d0a72aedf8b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Hotels Section */
+        .hotels {
+            padding: 80px 0;
+        }
+        
+        .city-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            padding: 10px 30px;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary-color);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .star-category {
+            margin-bottom: 40px;
+        }
+        
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .hotel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .hotel-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hotel-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .hotel-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hotel-card:hover .hotel-img img {
+            transform: scale(1.1);
+        }
+        
+        .hotel-info {
+            padding: 20px;
+        }
+        
+        .hotel-name {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .hotel-features {
+            margin-bottom: 15px;
+            color: #64748b;
+        }
+        
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        
+        .hotel-location i {
+            margin-right: 5px;
+            color: var(--accent-color);
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                height: 70vh;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .tab-btn {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+            
+            .hotel-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Al Qasim <span>Transport & Hotels</span></a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#hotels">Hotels</a></li>
+                    <li><a href="#transport">Transport</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Premium Hotels in Makkah & Madinah</h1>
+                <p>Experience comfort and convenience during your spiritual journey with our carefully selected accommodations near the holy mosques.</p>
+                <a href="#hotels" class="btn">View Hotels</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotels Section -->
+    <section id="hotels" class="hotels">
+        <div class="container">
+            <h2 class="section-title">Our Hotels</h2>
+            
+            <div class="city-tabs">
+                <button class="tab-btn active" data-city="makkah">Makkah</button>
+                <button class="tab-btn" data-city="madinah">Madinah</button>
+            </div>
+            
+            <!-- Makkah Hotels -->
+            <div id="makkah" class="tab-content active">
+                <!-- 5-Star Hotels -->
+                <div class="star-category">
+                    <h3 class="category-title">5-Star Hotels</h3>
+                    <div class="hotel-grid">
+                        <!-- Hotel 1 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Raffles Makkah Palace - 5 Star')">
+                            <div class="hotel-img">
+                                <img src="cfcff55aeccd0282a6431a645a6affb9.webp" alt="Raffles Makkah Palace">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Raffles Makkah Palace</h4>
+                                <p class="hotel-features">Luxury suites, Middle Eastern design, premium pilgrim services</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Near Al-Masjid Al-Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 2 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Makkah Clock Royal Tower - 5 Star')">
+                            <div class="hotel-img">
+                                <img src="cfcff55aeccd0282a6431a645a6affb9.webp" alt="Makkah Clock Royal Tower">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Makkah Clock Royal Tower (Fairmont)</h4>
+                                <p class="hotel-features">76 floors, fine dining, direct Haram views</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Abraj Al Bait complex</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 3 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Swissôtel Makkah - 5 Star')">
+                            <div class="hotel-img">
+                                <img src="cfcff55aeccd0282a6431a645a6affb9.webp" alt="Swissôtel Makkah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Swissôtel Makkah</h4>
+                                <p class="hotel-features">Luxury rooms, Haram views, high-end dining</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Abraj Al Bait</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 4-Star Hotels -->
+                <div class="star-category">
+                    <h3 class="category-title">4-Star Hotels</h3>
+                    <div class="hotel-grid">
+                        <!-- Hotel 1 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('DoubleTree by Hilton Jabal Omar Makkah - 4 Star')">
+                            <div class="hotel-img">
+                                <img src="25948adc3b070c6666eb45fb04cd975f.webp" alt="DoubleTree by Hilton Jabal Omar Makkah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">DoubleTree by Hilton Jabal Omar Makkah</h4>
+                                <p class="hotel-features">Free breakfast, modern rooms</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Ajyad district</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 2 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('voco Makkah - 4 Star')">
+                            <div class="hotel-img">
+                                <img src="b6c0e293938db4b9afb109856cd7f357.webp" alt="voco Makkah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">voco Makkah (IHG)</h4>
+                                <p class="hotel-features">Restaurant, shared lounge</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>0.8 mi from Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 3 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Novotel Makkah Thakher City - 4 Star')">
+                            <div class="hotel-img">
+                                <img src="428209401.jpg" alt="Novotel Makkah Thakher City">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Novotel Makkah Thakher City</h4>
+                                <p class="hotel-features">Fitness center, restaurant</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>3.3 mi from Hira Cave</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 3-Star Hotels -->
+                <div class="star-category">
+                    <h3 class="category-title">3-Star Hotels</h3>
+                    <div class="hotel-grid">
+                        <!-- Hotel 1 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Le Méridien Towers Makkah - 3 Star')">
+                            <div class="hotel-img">
+                                <img src="25948adc3b070c6666eb45fb04cd975f.webp" alt="Le Méridien Towers Makkah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Le Méridien Towers Makkah</h4>
+                                <p class="hotel-features">Kitchenettes, elegant design</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Near Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 2 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Elaf Qinwan Hotel - 3 Star')">
+                            <div class="hotel-img">
+                                <img src="25948adc3b070c6666eb45fb04cd975f.webp" alt="Elaf Qinwan Hotel">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Elaf Qinwan Hotel</h4>
+                                <p class="hotel-features">Free parking, restaurant</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>2.8 mi from Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 3 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Worth Elite Hotel - 3 Star')">
+                            <div class="hotel-img">
+                                <img src="cfcff55aeccd0282a6431a645a6affb9.webp" alt="Worth Elite Hotel">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Worth Elite Hotel</h4>
+                                <p class="hotel-features">Clean, well-rated</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>13-min walk to Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Madinah Hotels -->
+            <div id="madinah" class="tab-content">
+                <!-- 5-Star Hotels -->
+                <div class="star-category">
+                    <h3 class="category-title">5-Star Hotels</h3>
+                    <div class="hotel-grid">
+                        <!-- Hotel 1 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Pullman Zamzam Madinah - 5 Star')">
+                            <div class="hotel-img">
+                                <img src="25948adc3b070c6666eb45fb04cd975f.webp" alt="Pullman Zamzam Madinah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Pullman Zamzam Madinah</h4>
+                                <p class="hotel-features">Luxury stay, Haram proximity</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Near Al-Masjid an-Nabawi</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 2 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Crowne Plaza Madinah - 5 Star')">
+                            <div class="hotel-img">
+                                <img src="428209401.jpg" alt="Crowne Plaza Madinah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Crowne Plaza Madinah (IHG)</h4>
+                                <p class="hotel-features">High-end service, near Prophet's Mosque</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Central Madinah</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 3 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('InterContinental Dar Al Iman Madinah - 5 Star')">
+                            <div class="hotel-img">
+                                <img src="428209401.jpg" alt="InterContinental Dar Al Iman Madinah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">InterContinental Dar Al Iman Madinah</h4>
+                                <p class="hotel-features">Premium hospitality</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Close to Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 4-Star Hotels -->
+                <div class="star-category">
+                    <h3 class="category-title">4-Star Hotels</h3>
+                    <div class="hotel-grid">
+                        <!-- Hotel 1 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Radisson Hotel Madinah - 4 Star')">
+                            <div class="hotel-img">
+                                <img src="cfcff55aeccd0282a6431a645a6affb9.webp" alt="Radisson Hotel Madinah">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Radisson Hotel Madinah</h4>
+                                <p class="hotel-features">Outdoor pool, fitness center</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>3.9 mi from Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 2 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Dallah Taibah Hotel - 4 Star')">
+                            <div class="hotel-img">
+                                <img src="cfcff55aeccd0282a6431a645a6affb9.webp" alt="Dallah Taibah Hotel">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Dallah Taibah Hotel</h4>
+                                <p class="hotel-features">Shopping access, concierge</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>164 ft from Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 3-Star Hotels -->
+                <div class="star-category">
+                    <h3 class="category-title">3-Star Hotels</h3>
+                    <div class="hotel-grid">
+                        <!-- Hotel 1 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Taiba Front Hotel - 3 Star')">
+                            <div class="hotel-img">
+                                <img src="cfcff55aeccd0282a6431a645a6affb9.webp" alt="Taiba Front Hotel">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Taiba Front Hotel</h4>
+                                <p class="hotel-features">Well-rated, central</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Few mins from Haram</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 2 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Mysk Al Balad - 3 Star')">
+                            <div class="hotel-img">
+                                <img src="b6c0e293938db4b9afb109856cd7f357.webp" alt="Mysk Al Balad">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Mysk Al Balad</h4>
+                                <p class="hotel-features">Buffet breakfast, free WiFi</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Central Madinah</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 3 -->
+                        <div class="hotel-card" onclick="redirectToWhatsApp('Faraj Almadina Hotel - 3 Star')">
+                            <div class="hotel-img">
+                                <img src="b6c0e293938db4b9afb109856cd7f357.webp" alt="Faraj Almadina Hotel">
+                            </div>
+                            <div class="hotel-info">
+                                <h4 class="hotel-name">Faraj Almadina Hotel</h4>
+                                <p class="hotel-features">Shared lounge, bar</p>
+                                <div class="hotel-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Near shopping areas</span>
+                                </div>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transport Section -->
+    <section id="transport" class="transport">
+        <div class="container">
+            <h2 class="section-title">Our Transport Services</h2>
+            <div class="transport-content">
+                <p>We provide premium transportation services between Makkah and Madinah, as well as airport transfers and local transportation for your convenience during your spiritual journey.</p>
+                <a href="#" class="btn" onclick="redirectToWhatsApp('Transport Inquiry')">Book Transport</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Al Qasim Transport & Hotels</h3>
+                    <p>Providing premium accommodation and transportation services for pilgrims and visitors to the holy cities of Makkah and Madinah.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#hotels">Hotels</a></li>
+                        <li><a href="#transport">Transport</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Makkah, Saudi Arabia</p>
+                    <p><i class="fas fa-phone"></i> +966 54 360 7612</p>
+                    <p><i class="fas fa-envelope"></i> info@alqasimhotels.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Al Qasim Transport & Hotels. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/966543607612" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // City Tabs Functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const city = btn.getAttribute('data-city');
+                document.getElementById(city).classList.add('active');
+            });
+        });
+        
+        // Function to redirect to WhatsApp with hotel name
+        function redirectToWhatsApp(hotelName) {
+            const message = `I'm interested in booking ${hotelName}. Please provide more information.`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/966543607612?text=${encodedMessage}`, '_blank');
+        }
+        
+        // Make all hotel cards clickable for WhatsApp redirect
+        document.querySelectorAll('.hotel-card').forEach(card => {
+            card.style.cursor = 'pointer';
+        });
+    </script>
+</body>
+</html>
